@@ -36,32 +36,17 @@ public class Account {
       return totalBalance;
    } 
 
+   //*keys
    public void credit(double amount) {
-     
+     this.availableBalance -= amount;
+     this.totalBalance -= amount;
    }
 
    public void debit(double amount) {
-
+       
    }
 
    public int getAccountNumber() {
       return accountNumber;  
    }
-
-   //*keys
-    /**
-     * @param availableBalance the availableBalance to set
-     */
-    public void setAvailableBalance(double availableBalance) {
-        this.availableBalance = availableBalance;
-    }
-
-    /**
-     * @param totalBalance the totalBalance to set
-     */
-    public void setTotalBalance(double totalBalance) {
-        this.totalBalance = totalBalance;
-    }
- 
-   
 } 

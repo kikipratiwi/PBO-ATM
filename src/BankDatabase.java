@@ -44,18 +44,4 @@ public class BankDatabase {
       getAccount(userAccountNumber).debit(amount);
    } 
    
-    //*keys
-    /**
-     * @param availableBalance the availableBalance to set
-     */
-    public void setAvailableBalance(int userAccountNumber, double availableBalance) {
-        getAccount(userAccountNumber).setAvailableBalance(availableBalance);
-    }
-
-    /**
-     * @param totalBalance the totalBalance to set
-     */
-    public void setTotalBalance(int userAccountNumber, double totalBalance) {
-        getAccount(userAccountNumber).setAvailableBalance(totalBalance);
-    }
 } 

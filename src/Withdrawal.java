@@ -31,26 +31,13 @@ public class Withdrawal extends Transaction {
        //*keys
        amount = displayMenuOfAmounts();
        Screen screen = getScreen();
-       
-        // get the available balance for the account involved
-        double availableBalance = 
-           bankDatabase.getAvailableBalance(getAccountNumber());
-        
-        // get the total balance for the account involved
-        double totalBalance = 
-           bankDatabase.getTotalBalance(getAccountNumber());
         
        if(amount != CANCELED) {
-           
             cashDispenser = new CashDispenser();
             
             if(cashDispenser.isSufficientCashAvailable(amount)) {
                 cashDispenser.dispenseCash(amount);
-                availableBalance -= amount;
-                totalBalance -= amount;
-                
-                bankDatabase.setAvailableBalance(getAccountNumber(), availableBalance);
-                bankDatabase.setTotalBalance(getAccountNumber(), availableBalance);
+                bankDatabase.credit(getAccountNumber(), amount);
             } else {
                 screen.displayMessageLine("It's not enough balance");
             }
