@@ -3,7 +3,7 @@ public class BankDatabase {
    
    public BankDatabase() {
       accounts = new Account[2]; // just 2 accounts for testing
-      accounts[0] = new Account(1234, 4321, 1000.0, 1200.0);
+      accounts[0] = new Account(12345, 54321, 1000.0, 1200.0);
       accounts[1] = new Account(8765, 5678, 200.0, 200.0);  
    }
    

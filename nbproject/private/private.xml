@@ -5,10 +5,11 @@
         <group>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/ATM.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Account.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/BalanceInquiry.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/CashDispenser.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/DepositSlot.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Deposit.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/BankDatabase.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Withdrawal.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Transaction.java</file>
         </group>
     </open-files>
 </project-private>
