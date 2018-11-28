@@ -28,11 +28,24 @@ public class Withdrawal extends Transaction {
        amount = displayMenuOfAmounts();
        Screen screen = getScreen();
        
+        BankDatabase bankDatabase = getBankDatabase();
+
+        // get the available balance for the account involved
+        double availableBalance = 
+           bankDatabase.getAvailableBalance(getAccountNumber());
+       
+        // get the total balance for the account involved
+        double totalBalance = 
+           bankDatabase.getTotalBalance(getAccountNumber());
+        
        if(amount != CANCELED) {
+           
             cashDispenser = new CashDispenser();
             
             if(cashDispenser.isSufficientCashAvailable(amount)) {
                 cashDispenser.dispenseCash(amount);
+                availableBalance -= amount;
+                totalBalance -= amount;
             } else {
                 screen.displayMessageLine("It's not enough balance");
             }
@@ -52,9 +65,6 @@ public class Withdrawal extends Transaction {
       
       // array of amounts to correspond to menu numbers
       int[] amounts = {0, 20, 40, 60, 100, 200};
-      //*keys
-      int input;
-       input = 0;
               
       // loop while no valid choice has been made
       while (userChoice == 0) {
@@ -68,8 +78,7 @@ public class Withdrawal extends Transaction {
          screen.displayMessageLine("6 - Cancel transaction");
          screen.displayMessage("\nChoose a withdrawal amount: ");
 
-         //*keys
-         input = keypad.getInput(); // get user input through keypad
+         int input = keypad.getInput(); // get user input through keypad
 
          // determine how to proceed based on the input value
          switch (input) {

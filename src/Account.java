@@ -47,9 +47,5 @@ public class Account {
    public int getAccountNumber() {
       return accountNumber;  
    }
-   
-   //*keys
-   public int getPin() {
-      return pin;  
-   }   
+ 
 } 

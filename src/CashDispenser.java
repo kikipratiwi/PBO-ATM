@@ -8,11 +8,6 @@ public class CashDispenser {
       count = INITIAL_COUNT; // set count attribute to default
    }
    
-   //*keys
-   public CashDispenser(int initial_count) {
-      count = initial_count; // set count attribute to default
-   }
-
    // simulates dispensing of specified amount of cash
    public void dispenseCash(int amount) {
       int billsRequired = amount / 20; // number of $20 bills required
