@@ -38,6 +38,7 @@ public class Withdrawal extends Transaction {
             if(cashDispenser.isSufficientCashAvailable(amount)) {
                 cashDispenser.dispenseCash(amount);
                 bankDatabase.credit(getAccountNumber(), amount);
+                screen.displayMessageLine("Your cash has been dispensed. Please take your cash now.");
             } else {
                 screen.displayMessageLine("It's not enough balance");
             }
