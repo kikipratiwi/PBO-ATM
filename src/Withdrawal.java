@@ -6,6 +6,9 @@ public class Withdrawal extends Transaction {
    private Keypad keypad; // reference to keypad
    private CashDispenser cashDispenser; // reference to cash dispenser
 
+   //*keys
+   private BankDatabase bankDatabase;
+   
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 6;
 
@@ -19,6 +22,7 @@ public class Withdrawal extends Transaction {
       
       //*keys
       keypad = new Keypad();
+      bankDatabase = atmBankDatabase;
    }
 
    // perform transaction
@@ -28,12 +32,10 @@ public class Withdrawal extends Transaction {
        amount = displayMenuOfAmounts();
        Screen screen = getScreen();
        
-        BankDatabase bankDatabase = getBankDatabase();
-
         // get the available balance for the account involved
         double availableBalance = 
            bankDatabase.getAvailableBalance(getAccountNumber());
-       
+        
         // get the total balance for the account involved
         double totalBalance = 
            bankDatabase.getTotalBalance(getAccountNumber());
@@ -46,14 +48,15 @@ public class Withdrawal extends Transaction {
                 cashDispenser.dispenseCash(amount);
                 availableBalance -= amount;
                 totalBalance -= amount;
+                
+                bankDatabase.setAvailableBalance(getAccountNumber(), availableBalance);
+                bankDatabase.setTotalBalance(getAccountNumber(), availableBalance);
             } else {
                 screen.displayMessageLine("It's not enough balance");
             }
        } else {
            screen.displayMessageLine("Canceling transaction...");
        }
-       
-       
    } 
 
    // display a menu of withdrawal amounts and the option to cancel;

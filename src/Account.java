@@ -47,5 +47,21 @@ public class Account {
    public int getAccountNumber() {
       return accountNumber;  
    }
+
+   //*keys
+    /**
+     * @param availableBalance the availableBalance to set
+     */
+    public void setAvailableBalance(double availableBalance) {
+        this.availableBalance = availableBalance;
+    }
+
+    /**
+     * @param totalBalance the totalBalance to set
+     */
+    public void setTotalBalance(double totalBalance) {
+        this.totalBalance = totalBalance;
+    }
  
+   
 } 
