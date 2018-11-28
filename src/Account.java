@@ -43,7 +43,7 @@ public class Account {
    }
 
    public void debit(double amount) {
-       
+     this.totalBalance += amount;
    }
 
    public int getAccountNumber() {

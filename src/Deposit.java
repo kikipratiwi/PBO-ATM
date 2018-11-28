@@ -4,6 +4,9 @@ public class Deposit extends Transaction {
    private DepositSlot depositSlot; // reference to deposit slot
    private final static int CANCELED = 0; // constant for cancel option
 
+   //*keys
+   private BankDatabase bankDatabase;
+   
    // Deposit constructor
    public Deposit(int userAccountNumber, Screen atmScreen, 
       BankDatabase atmBankDatabase, Keypad atmKeypad, 
@@ -11,13 +14,32 @@ public class Deposit extends Transaction {
 
       // initialize superclass variables
       super(userAccountNumber, atmScreen, atmBankDatabase);
-
+      
+      //*keys
+      keypad = new Keypad();
+      bankDatabase = atmBankDatabase;
+      depositSlot = atmDepositSlot;
    } 
 
    // perform transaction
    @Override
    public void execute() {
- 
+       //*keys
+       amount = promptForDepositAmount();
+       Screen screen = getScreen();
+        
+       if(amount != CANCELED) {
+            screen.displayMessage("\nPlease insert a deposit envelope containing ");
+            screen.displayDollarAmount(amount);
+            
+            if(depositSlot.isEnvelopeReceived()) {
+                screen.displayMessageLine("\n\nYour envelope has been received.\n" + "NOTE: The money just deposited will not be available until we verify the amount of any enclosed cash and your checks clear.");
+                bankDatabase.debit(getAccountNumber(), amount);     
+            }
+            
+       } else {
+           screen.displayMessageLine("Canceling transaction...");
+       }
    }
 
    // prompt user to enter a deposit amount in cents 

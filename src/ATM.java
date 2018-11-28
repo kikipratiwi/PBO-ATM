@@ -5,6 +5,8 @@ public class ATM {
    private Keypad keypad; // ATM's keypad
    private CashDispenser cashDispenser; // ATM's cash dispenser
 
+   //*keys
+   DepositSlot atmDepositSlot; //ATM's deposit slot
    private BankDatabase bankDatabase; // account information database
 
    // constants corresponding to main menu options
@@ -21,6 +23,9 @@ public class ATM {
       keypad = new Keypad(); // create keypad 
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
+      
+      //*keys
+      atmDepositSlot = new DepositSlot();
    }
 
    // start ATM 
@@ -76,22 +81,15 @@ public class ATM {
          // decide how to proceed based on user's menu selection
          switch (mainMenuSelection) {
             // user chose to perform one of three transaction types
-            case BALANCE_INQUIRY:         
-
-               // initialize as new object of chosen type
+            case BALANCE_INQUIRY:  
+            case WITHDRAWAL:
+            case DEPOSIT:
+                // initialize as new object of chosen type
                currentTransaction = 
                   createTransaction(mainMenuSelection);
 
                currentTransaction.execute(); // execute transaction
                break; 
-            case WITHDRAWAL:
-                //*keys
-                // initialize as new object of chosen type
-                currentTransaction = 
-                   createTransaction(mainMenuSelection);
-
-                currentTransaction.execute(); // execute transaction
-                break;
             case EXIT: // user chose to terminate session
                screen.displayMessageLine("\nExiting the system...");
                userExited = true; // this ATM session should end
@@ -127,6 +125,11 @@ public class ATM {
          case WITHDRAWAL:
             temp = new Withdrawal(
                currentAccountNumber, screen, bankDatabase, keypad, cashDispenser);
+            break;
+         //*keys   
+         case DEPOSIT:
+            temp = new Deposit(
+                    currentAccountNumber, screen, bankDatabase, keypad, atmDepositSlot);
             break;
       }
 
