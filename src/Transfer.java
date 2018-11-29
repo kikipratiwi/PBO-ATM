@@ -62,11 +62,13 @@ public class Transfer extends Transaction {
 
             if(transferDest.getUserAccount() == null) {
                 screen.displayMessageLine("Invalid account number destination.");
-            } else if (bankDatabase.getAvailableBalance(getAccountNumber()) > transferDest.getAmount()) {
-                screen.displayMessageLine("It's not enough balance");
-            } else {
-                valid = true;
+                break;
             }
+            if (bankDatabase.getAvailableBalance(getAccountNumber()) > transferDest.getAmount()) {
+                screen.displayMessageLine("It's not enough balance");
+                break;
+            }
+                valid = true;
         }
        
         screen.displayMessageLine("\nAre you sure for this transaction (1 to yes or 0 to cancel) : ");
