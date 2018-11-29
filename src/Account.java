@@ -49,4 +49,9 @@ public class Account {
    public int getAccountNumber() {
       return accountNumber;  
    }
+   
+   public void debitTransfer(double amount) { 
+        this.availableBalance += amount;
+        this.totalBalance += amount;
+   }
 } 

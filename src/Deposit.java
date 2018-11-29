@@ -16,7 +16,7 @@ public class Deposit extends Transaction {
       super(userAccountNumber, atmScreen, atmBankDatabase);
       
       //*keys
-      keypad = new Keypad();
+      keypad = atmKeypad;
       bankDatabase = atmBankDatabase;
       depositSlot = atmDepositSlot;
    } 

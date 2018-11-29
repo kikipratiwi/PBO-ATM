@@ -21,7 +21,7 @@ public class Withdrawal extends Transaction {
       super(userAccountNumber, atmScreen, atmBankDatabase);
       
       //*keys
-      keypad = new Keypad();
+      keypad = atmKeypad;
       bankDatabase = atmBankDatabase;
    }
 

@@ -13,7 +13,8 @@ public class ATM {
    private static final int BALANCE_INQUIRY = 1;
    private static final int WITHDRAWAL = 2;
    private static final int DEPOSIT = 3;
-   private static final int EXIT = 4;
+   private static final int TRANSFER = 4;
+   private static final int EXIT = 5;
 
    // no-argument ATM constructor initializes instance variables
    public ATM() {
@@ -84,6 +85,8 @@ public class ATM {
             case BALANCE_INQUIRY:  
             case WITHDRAWAL:
             case DEPOSIT:
+            case TRANSFER:
+                
                 // initialize as new object of chosen type
                currentTransaction = 
                   createTransaction(mainMenuSelection);
@@ -108,7 +111,8 @@ public class ATM {
       screen.displayMessageLine("1 - View my balance");
       screen.displayMessageLine("2 - Withdraw cash");
       screen.displayMessageLine("3 - Deposit funds");
-      screen.displayMessageLine("4 - Exit\n");
+      screen.displayMessageLine("4 - Transfer");
+      screen.displayMessageLine("5 - Exit\n");
       screen.displayMessage("Enter a choice: ");
       return keypad.getInput(); // return user's selection
    } 
@@ -131,6 +135,10 @@ public class ATM {
             temp = new Deposit(
                     currentAccountNumber, screen, bankDatabase, keypad, atmDepositSlot);
             break;
+         case TRANSFER:
+             temp = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);
+             break;
+        
       }
 
       return temp;

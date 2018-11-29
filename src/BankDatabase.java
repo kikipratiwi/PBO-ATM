@@ -26,7 +26,7 @@ public class BankDatabase {
       else {
          return false; // account number not found, so return false
       }
-   } 
+   }
 
    public double getAvailableBalance(int userAccountNumber) {
       return getAccount(userAccountNumber).getAvailableBalance();
@@ -43,5 +43,22 @@ public class BankDatabase {
    public void debit(int userAccountNumber, double amount) {
       getAccount(userAccountNumber).debit(amount);
    } 
+   
+   //*keys
+   public Account isAccountExist(int userAccountNumber) {
+      Account userAccount = getAccount(userAccountNumber);
+      // if account exists, return account
+      
+      if (userAccount != null) {
+         return userAccount;
+      }
+      else {
+         return null; // account number not found, so return false
+      }
+   }
+   
+   public void debitTransfer(int userAccountNumber, double amount) {
+        getAccount(userAccountNumber).debitTransfer(amount);
+   }
    
 } 
