@@ -9,5 +9,10 @@ public class Keypad {
 
    public int getInput() {
       return input.nextInt(); // user enters an integer
-   } 
+   }
+   
+   //*keys
+   public long getInputLong() {
+       return input.nextLong();
+   }
 } 
