@@ -2,17 +2,17 @@ public class BankDatabase {
    private Account[] accounts; // array of Accounts
    
    public BankDatabase() {
-
-      accounts = new Account[5]; // just 2 accounts for testing
+      accounts = new Account[7]; // just 7 accounts for testing
       accounts[0] = new Account(12345, 54321, 1000.0, 1200.0);
       accounts[1] = new Account(8765, 5678, 200.0, 200.0);
       //*keys
       accounts[2] = new Account(112233, 445566, 0, 0); //nomor meter, idpel
       accounts[3] = new Account(628382, 0, 500.0, 500.0); //nomor hp, 0, saldo
-      
+      //*lisna
+      accounts[4] = new Account(8589, 0000, 1000.0, 000); //account ovo with no_telp and saldo
+      accounts[5] = new Account(8521, 0000, 1500.0, 000); //account ovo with no_telp and saldo      
       //akun id wifi
-      accounts[4] = new Account (987654321, 4444, 0, 0);
-
+      accounts[6] = new Account (987654321, 4444, 0, 0);
    }
    
    private Account getAccount(int accountNumber) {

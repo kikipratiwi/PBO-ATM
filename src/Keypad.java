@@ -15,4 +15,8 @@ public class Keypad {
    public long getInputLong() {
        return input.nextLong();
    }
+   
+   public String getInputString() {
+       return input.next(); // user enters an String
+   }
 } 

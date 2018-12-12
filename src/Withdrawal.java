@@ -5,7 +5,7 @@ public class Withdrawal extends Transaction {
    private int amount; // amount to withdraw
    private Keypad keypad; // reference to keypad
    private CashDispenser cashDispenser; // reference to cash dispenser
-
+   private History history = new History();
    //*keys
    private BankDatabase bankDatabase;
    
@@ -39,6 +39,7 @@ public class Withdrawal extends Transaction {
                 cashDispenser.dispenseCash(amount);
                 bankDatabase.credit(getAccountNumber(), amount);
                 screen.displayMessageLine("Your cash has been dispensed. Please take your cash now.");
+                history.saveToFile(1, getAccountNumber(), amount);
             } else {
                 screen.displayMessageLine("It's not enough balance");
             }

@@ -15,8 +15,9 @@ public class Payment extends Transaction {
    Screen screen;
    
    // constant corresponding to menu option to cancel
+   private final static int CANCELED = 0;
    private static final int TOPUP_GOPAY = 1;
-   private final static int CANCELED = 2;
+   private static final int TOPUP_OVO = 2;
 
     public Payment(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad) {
         
@@ -44,7 +45,20 @@ public class Payment extends Transaction {
                 } else {
                     screen.displayMessageLine("Canceling transaction...");
                 }
-                break;       
+                break;
+                
+            case TOPUP_OVO:
+                TransferDestination topUpDest = promptForTopUpOVOTransaction();
+        
+                if(topUpDest != null) {
+                    bankDatabase.credit(getAccountNumber(), topUpDest.getAmount());
+                    bankDatabase.debitTransfer(topUpDest.getUserAccount().getAccountNumber(), topUpDest.getAmount());
+
+                    screen.displayMessageLine("Transaction success.");
+                }else {
+                    screen.displayMessageLine("Canceling transaction...");
+                }
+
             case CANCELED:
                 break;
             default :
@@ -98,27 +112,75 @@ public class Payment extends Transaction {
         return null;
     }
  
+    private TransferDestination promptForTopUpOVOTransaction() {
+        boolean valid = false;
+        TransferDestination topUpDest = new TransferDestination();
+        screen = getScreen();
+        int input;
+
+        screen.displayMessage("Please add 39358 before your phone number");
+        screen.displayMessage("\nPlease enter destination account number : ");
+        String destinationPhoneNumber = keypad.getInputString();
+
+        if(destinationPhoneNumber.startsWith("39358")) {
+            screen.displayMessage("\nPlease enter a transfer amount in " + "CENTS : ");
+            amount = keypad.getInput();
+            amount = amount / 100;
+            
+            int result = Integer.parseInt(destinationPhoneNumber.substring(5));
+            topUpDest.setAccount(result);
+            topUpDest.setAmount(amount);
+
+            if(topUpDest.getUserAccount() != null){
+                if(bankDatabase.getAvailableBalance(getAccountNumber()) > topUpDest.getAmount()) {
+                    valid = true;
+                }else{
+                    screen.displayMessageLine("It's not enough balance");
+                }
+            }else{
+                screen.displayMessageLine("Invalid phone number destination.");
+            }
+        }else {
+            screen.displayMessage("You don't add 39358 in your account number.");
+        }
+        screen.displayMessage("\nAre you sure for this transaction (1 to yes or 0 to cancel) : ");
+        input = keypad.getInput();
+        
+        if (valid && input == CANCELED) {
+            return null;
+        } else if (input == 1) {
+            return topUpDest;
+        }
+        
+        screen.displayMessageLine(
+           "\nInvalid selection. Try again.");
+        return null;
+    }
+    
     private int displayMenuOfPurchase() {
       int userChoice = 0; // local variable to store return value
 
       Screen screen = getScreen(); // get screen reference
       
       // array of amounts to correspond to menu numbers
-      int[] menus = {0, TOPUP_GOPAY};
+      int[] menus = {0, TOPUP_GOPAY, TOPUP_OVO};
               
       // loop while no valid choice has been made
       while (userChoice == 0) {
          // display the withdrawal menu
          screen.displayMessageLine("\nWithdrawal Menu:");
          screen.displayMessageLine("1 - TOP UP Go-Pay");
-         screen.displayMessageLine("2 - Cancel transaction");
+         screen.displayMessageLine("2 - TOP UP OVO");
+         screen.displayMessageLine("0 - Cancel transaction");
          screen.displayMessage("\nChoose a purchase menu: ");
 
          int input = keypad.getInput(); // get user input through keypad
 
          // determine how to proceed based on the input value
          switch (input) {
-            case TOPUP_GOPAY: // if the user chose a withdrawal amount 
+            case TOPUP_GOPAY: 
+            case TOPUP_OVO: 
+                    // if the user chose a withdrawal amount 
                     // (i.e., chose option 1 or 2), return the
                     // corresponding menu from menus array
                userChoice = menus[input]; // save user's choice

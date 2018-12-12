@@ -3,7 +3,7 @@ public class Deposit extends Transaction {
    private Keypad keypad; // reference to keypad
    private DepositSlot depositSlot; // reference to deposit slot
    private final static int CANCELED = 0; // constant for cancel option
-
+    private History history = new History();
    //*keys
    private BankDatabase bankDatabase;
    
@@ -35,6 +35,8 @@ public class Deposit extends Transaction {
             if(depositSlot.isEnvelopeReceived()) {
                 screen.displayMessageLine("\n\nYour envelope has been received.\n" + "NOTE: The money just deposited will not be available until we verify the amount of any enclosed cash and your checks clear.");
                 bankDatabase.debit(getAccountNumber(), amount);     
+                history.saveToFile(2, getAccountNumber(), amount);
+            
             }
             
        } else {
