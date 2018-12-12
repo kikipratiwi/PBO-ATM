@@ -14,9 +14,10 @@ public class ATM {
    private static final int WITHDRAWAL = 2;
    private static final int DEPOSIT = 3;
    private static final int TRANSFER = 4;
-   private static final int PURCHASE = 5;
-   private static final int PAYMENT = 6;
-   private static final int EXIT = 7;
+   private static final int PAY_WIFI = 5;
+   private static final int PURCHASE = 6;
+   private static final int PAYMENT = 7;
+   private static final int EXIT = 8;
 
    // no-argument ATM constructor initializes instance variables
    public ATM() {
@@ -88,6 +89,7 @@ public class ATM {
             case WITHDRAWAL:
             case DEPOSIT:
             case TRANSFER:
+            case PAY_WIFI:
             case PURCHASE:
             case PAYMENT:
                 
@@ -116,9 +118,10 @@ public class ATM {
       screen.displayMessageLine("2 - Withdraw cash");
       screen.displayMessageLine("3 - Deposit funds");
       screen.displayMessageLine("4 - Transfer");
-      screen.displayMessageLine("5 - Purchase");
-      screen.displayMessageLine("6 - Payment");
-      screen.displayMessageLine("7 - Exit\n");
+      screen.displayMessageLine("5 - Pay Wifi Bill");
+      screen.displayMessageLine("6 - Purchase");
+      screen.displayMessageLine("7 - Payment");
+      screen.displayMessageLine("8 - Exit\n");
       screen.displayMessage("Enter a choice: ");
       return keypad.getInput(); // return user's selection
    } 
@@ -143,6 +146,9 @@ public class ATM {
             break;
          case TRANSFER:
              temp = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);
+             break;
+         case PAY_WIFI:
+             temp = new BayarWifi(currentAccountNumber, screen, bankDatabase, keypad);
              break;
          case PURCHASE:
              temp = new Purchase(currentAccountNumber, screen, bankDatabase, keypad);
