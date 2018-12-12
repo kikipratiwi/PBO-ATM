@@ -3,7 +3,7 @@ public class Account {
    private int pin; // PIN for authentication
    private double availableBalance; // funds available for withdrawal
    private double totalBalance; // funds available & pending deposits
-
+//   private History history = new History(); 
    // Account constructor initializes attributes
    public Account(int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance) {
@@ -44,6 +44,7 @@ public class Account {
 
    public void debit(double amount) {
      this.totalBalance += amount;
+     
    }
 
    public int getAccountNumber() {

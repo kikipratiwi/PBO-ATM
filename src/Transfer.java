@@ -7,7 +7,7 @@ public class Transfer extends Transaction {
    private Keypad keypad; // reference to keypad
    private BankDatabase bankDatabase;
    Screen screen;
-   
+    private History history = new History();
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 0;
 
@@ -33,6 +33,8 @@ public class Transfer extends Transaction {
             screen.displayMessageLine("Transaction success.");
             
                      screen.displayDollarAmount(transferDest.getUserAccount().getAvailableBalance());
+                     history.saveToFile(3, getAccountNumber(), amount);
+            
        } else {
            screen.displayMessageLine("Canceling transaction...");
        }
