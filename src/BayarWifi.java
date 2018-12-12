@@ -89,9 +89,5 @@ public class BayarWifi extends Transaction {
         screen.displayMessageLine(
            "\nInvalid selection. Try again.");
         return null;
-    }
-    
-}
-
-    
+    }   
 }

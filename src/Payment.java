@@ -16,7 +16,8 @@ public class Payment extends Transaction {
    
    // constant corresponding to menu option to cancel
    private static final int TOPUP_GOPAY = 1;
-   private final static int CANCELED = 2;
+   private static final int TOPUPDANA = 2;
+   private final static int CANCELED = 3;
 
     public Payment(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad) {
         
@@ -44,7 +45,22 @@ public class Payment extends Transaction {
                 } else {
                     screen.displayMessageLine("Canceling transaction...");
                 }
-                break;       
+                break;
+            case TOPUPDANA:
+                TransferDestination  PayDest = promptForTopUpGoPayTransaction();
+        
+                if(PayDest != null) {
+                     bankDatabase.credit(getAccountNumber(), PayDest.getAmount());
+                     
+                     screen.displayDollarAmount(PayDest.getUserAccount().getAvailableBalance());
+                     bankDatabase.debitTransfer(PayDest.getUserAccount().getAccountNumber(), PayDest.getAmount());
+                     
+                     screen.displayMessage("Transaction Success.\n\nYour current DANA balance is: ");
+                     screen.displayDollarAmount(PayDest.getUserAccount().getAvailableBalance());
+                } else {
+                    screen.displayMessageLine("Canceling transaction...");
+                }
+                break;
             case CANCELED:
                 break;
             default :
@@ -104,14 +120,15 @@ public class Payment extends Transaction {
       Screen screen = getScreen(); // get screen reference
       
       // array of amounts to correspond to menu numbers
-      int[] menus = {0, TOPUP_GOPAY};
+      int[] menus = {0, TOPUP_GOPAY, TOPUPDANA};
               
       // loop while no valid choice has been made
       while (userChoice == 0) {
          // display the withdrawal menu
          screen.displayMessageLine("\nWithdrawal Menu:");
          screen.displayMessageLine("1 - TOP UP Go-Pay");
-         screen.displayMessageLine("2 - Cancel transaction");
+         screen.displayMessageLine("2 = Top-Up DANA");
+         screen.displayMessageLine("3 - Cancel transaction");
          screen.displayMessage("\nChoose a purchase menu: ");
 
          int input = keypad.getInput(); // get user input through keypad
@@ -122,7 +139,10 @@ public class Payment extends Transaction {
                     // (i.e., chose option 1 or 2), return the
                     // corresponding menu from menus array
                userChoice = menus[input]; // save user's choice
-               break;       
+               break; 
+            case TOPUPDANA:
+               userChoice = menus[input];
+               break;
             case CANCELED: // the user chose to cancel
                userChoice = CANCELED; // save user's choice
                break;

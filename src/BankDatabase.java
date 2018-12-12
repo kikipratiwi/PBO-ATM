@@ -3,7 +3,7 @@ public class BankDatabase {
    
    public BankDatabase() {
 
-      accounts = new Account[5]; // just 2 accounts for testing
+      accounts = new Account[6]; // just 2 accounts for testing
       accounts[0] = new Account(12345, 54321, 1000.0, 1200.0);
       accounts[1] = new Account(8765, 5678, 200.0, 200.0);
       //*keys
@@ -12,7 +12,9 @@ public class BankDatabase {
       
       //akun id wifi
       accounts[4] = new Account (987654321, 4444, 0, 0);
-
+      
+      // top-up DANA
+      accounts[5] = new Account(400812209, 0, 0, 0); // kode pembayaran, 0, saldo
    }
    
    private Account getAccount(int accountNumber) {
