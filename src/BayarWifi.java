@@ -62,7 +62,7 @@ public class BayarWifi extends Transaction {
             amount = keypad.getInputLong(); // receive input of deposit amount
 
             transferDest.setAccount(destinationAccountNumber);
-            transferDest.setAmount(amount / 100); // in dolar
+            transferDest.setAmount((int) (amount / 100)); // in dolar
 
             if(transferDest.getUserAccount() == null) {
                 screen.displayMessageLine("ID Number is not recognized.");

@@ -26,9 +26,13 @@ public class Transfer extends Transaction {
         
        if(transferDest != null) {
             bankDatabase.credit(getAccountNumber(), transferDest.getAmount());
+            
+                     screen.displayDollarAmount(transferDest.getUserAccount().getAvailableBalance());
             bankDatabase.debitTransfer(transferDest.getUserAccount().getAccountNumber(), transferDest.getAmount());
 
             screen.displayMessageLine("Transaction success.");
+            
+                     screen.displayDollarAmount(transferDest.getUserAccount().getAvailableBalance());
        } else {
            screen.displayMessageLine("Canceling transaction...");
        }
@@ -42,8 +46,8 @@ public class Transfer extends Transaction {
        
        screen = getScreen(); // get reference to screen
        int destinationAccountNumber, input;
-       long amount;
-       
+//       long amount;
+       int amount;
        while (!valid) {
             // display the prompt
             screen.displayMessage("\nPlease enter destination account number : ");
@@ -52,7 +56,8 @@ public class Transfer extends Transaction {
             // display the prompt
             screen.displayMessage("\nPlease enter a transfer amount in " + 
                "CENTS : ");
-            amount = keypad.getInputLong(); // receive input of deposit amount
+//            amount = keypad.getInputLong(); // receive input of deposit amount
+            amount = keypad.getInput(); // receive input of deposit amount
 
             transferDest.setAccount(destinationAccountNumber);
             transferDest.setAmount(amount / 100); // in dolar

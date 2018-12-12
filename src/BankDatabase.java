@@ -2,21 +2,28 @@ public class BankDatabase {
    private Account[] accounts; // array of Accounts
    
    public BankDatabase() {
-      accounts = new Account[3]; // just 2 accounts for testing
+
+      accounts = new Account[5]; // just 2 accounts for testing
       accounts[0] = new Account(12345, 54321, 1000.0, 1200.0);
-      accounts[1] = new Account(8765, 5678, 200.0, 200.0);  
+      accounts[1] = new Account(8765, 5678, 200.0, 200.0);
+      //*keys
+      accounts[2] = new Account(112233, 445566, 0, 0); //nomor meter, idpel
+      accounts[3] = new Account(628382, 0, 500.0, 500.0); //nomor hp, 0, saldo
       
-      //akun untuk id wifi
-      accounts[2] = new Account (987654321, 4444, 0, 0);
+      //akun id wifi
+      accounts[4] = new Account (987654321, 4444, 0, 0);
+
    }
    
    private Account getAccount(int accountNumber) {
        //*keys
-       return accounts[0].getAccountNumber() == accountNumber?accounts[0]:
-              accounts[1].getAccountNumber() == accountNumber?accounts[1]:
-              accounts[2].getAccountNumber() == accountNumber?accounts[2]:null;
+       for (Account account : accounts) {
+           if (accountNumber == account.getAccountNumber()) {
+               return account;
+           }
+       }
        
-//      return null; // if no matching account was found, return null
+      return null; // if no matching account was found, return null
    } 
 
    public boolean authenticateUser(int userAccountNumber, int userPIN) {
