@@ -26,14 +26,12 @@ public class Transfer extends Transaction {
         
        if(transferDest != null) {
             bankDatabase.credit(getAccountNumber(), transferDest.getAmount());
-            
-                     screen.displayDollarAmount(transferDest.getUserAccount().getAvailableBalance());
             bankDatabase.debitTransfer(transferDest.getUserAccount().getAccountNumber(), transferDest.getAmount());
 
             screen.displayMessageLine("Transaction success.");
             
-                     screen.displayDollarAmount(transferDest.getUserAccount().getAvailableBalance());
-                     history.saveToFile(3, getAccountNumber(), amount);
+            screen.displayDollarAmount(transferDest.getUserAccount().getAvailableBalance());
+            history.saveToFile(3, getAccountNumber(), amount);
             
        } else {
            screen.displayMessageLine("Canceling transaction...");
