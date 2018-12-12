@@ -2,15 +2,19 @@ public class BankDatabase {
    private Account[] accounts; // array of Accounts
    
    public BankDatabase() {
-      accounts = new Account[2]; // just 2 accounts for testing
+      accounts = new Account[3]; // just 2 accounts for testing
       accounts[0] = new Account(12345, 54321, 1000.0, 1200.0);
       accounts[1] = new Account(8765, 5678, 200.0, 200.0);  
+      
+      //akun untuk id wifi
+      accounts[2] = new Account (987654321, 4444, 0, 0);
    }
    
    private Account getAccount(int accountNumber) {
        //*keys
        return accounts[0].getAccountNumber() == accountNumber?accounts[0]:
-              accounts[1].getAccountNumber() == accountNumber?accounts[1]:null;
+              accounts[1].getAccountNumber() == accountNumber?accounts[1]:
+              accounts[2].getAccountNumber() == accountNumber?accounts[2]:null;
        
 //      return null; // if no matching account was found, return null
    } 
