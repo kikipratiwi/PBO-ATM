@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/TransferDestination.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/ATM.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Account.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Transfer.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/CashDispenser.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Keypad.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/BankDatabase.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Withdrawal.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Transaction.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

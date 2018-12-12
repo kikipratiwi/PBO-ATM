@@ -10,7 +10,8 @@
  */
 public class TransferDestination {
     private Account userAccount;
-    private long amount;
+//    private long amount;
+    private int amount;
     
     public TransferDestination() {
         
@@ -21,7 +22,8 @@ public class TransferDestination {
         userAccount = bankDatabase.isAccountExist(accountNumber);
     }
     
-    public void setAmount(long amount) {
+//    public void setAmount(long amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
@@ -35,7 +37,8 @@ public class TransferDestination {
     /**
      * @return the amount
      */
-    public long getAmount() {
+//    public long getAmount() {
+    public int getAmount() {
         return amount;
     }
     
