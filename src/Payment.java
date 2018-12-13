@@ -49,7 +49,7 @@ public class Payment extends Transaction {
                 break;
 
             case TOPUPDANA:
-                TransferDestination  PayDest = promptForTopUpGoPayTransaction();
+                TransferDestination  PayDest = promptForTopUpDANATransaction();
         
                 if(PayDest != null) {
                      bankDatabase.credit(getAccountNumber(), PayDest.getAmount());

@@ -58,21 +58,28 @@ public class BankDatabase {
       getAccount(userAccountNumber).debit(amount);
    } 
    
-   //*keys
-   public Account isAccountExist(int userAccountNumber) {
-      Account userAccount = getAccount(userAccountNumber);
-      // if account exists, return account
-      
-      if (userAccount != null) {
-         return userAccount;
-      }
-      else {
-         return null; // account number not found, so return false
-      }
-   }
+    //*keys
+    public Account isAccountExist(int userAccountNumber) {
+       Account userAccount = getAccount(userAccountNumber);
+       // if account exists, return account
+
+       if (userAccount != null) {
+          return userAccount;
+       }
+       else {
+          return null; // account number not found, so return false
+       }
+    }
    
-   public void debitTransfer(int userAccountNumber, double amount) {
-        getAccount(userAccountNumber).debitTransfer(amount);
-   }
-   
+    public void debitTransfer(int userAccountNumber, double amount) {
+         getAccount(userAccountNumber).debitTransfer(amount);
+    }
+    
+    public int getLastPIN(int userAccountNumber){
+        return getAccount(userAccountNumber).getLastPIN();
+    }
+    
+    public void setPIN(int userAccountNumber, int PIN){
+        getAccount(userAccountNumber).setPIN(PIN);
+    }
 } 
