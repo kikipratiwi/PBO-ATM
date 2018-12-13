@@ -1,3 +1,8 @@
+
+import java.io.*;
+import java.time.*;
+import java.util.Date;
+
 /**
  *
  * @author KIKI
@@ -6,10 +11,12 @@ public class Transfer extends Transaction {
    private int amount; // amount to withdraw
    private Keypad keypad; // reference to keypad
    private BankDatabase bankDatabase;
+   private int destinationAccountNumber;
    Screen screen;
     private History history = new History();
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 0;
+    private Date date;
 
     public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad) {
         
@@ -21,12 +28,22 @@ public class Transfer extends Transaction {
     @Override
     public void execute() {
        screen = getScreen();
-        
+       String for_Struct;
+       
        TransferDestination  transferDest = promptForDetailTransaction();
         
        if(transferDest != null) {
             bankDatabase.credit(getAccountNumber(), transferDest.getAmount());
             bankDatabase.debitTransfer(transferDest.getUserAccount().getAccountNumber(), transferDest.getAmount());
+            
+            screen.displayMessage("Do you want to print your transaction?\nY/N : ");
+            String inputString = keypad.getInputString();
+
+            if(inputString.equals("Y") || inputString.equals("y")){
+                for_Struct = Record_StructTransfer(destinationAccountNumber,amount);
+                String Filename = "Transfer.txt";
+                Print_StructTransfer(Filename,for_Struct);
+            }
 
             screen.displayMessageLine("Transaction success.");
             
@@ -45,9 +62,9 @@ public class Transfer extends Transaction {
        TransferDestination transferDest = new TransferDestination();
        
        screen = getScreen(); // get reference to screen
-       int destinationAccountNumber, input;
+       int input;
 //       long amount;
-       int amount;
+//       int amount;
        while (!valid) {
             // display the prompt
             screen.displayMessage("\nPlease enter destination account number : ");
@@ -89,4 +106,39 @@ public class Transfer extends Transaction {
         return null;
     }
     
+    private String Record_StructTransfer(int tujuan, int amount){
+        Screen screen = getScreen();
+        LocalDate ldate = LocalDate.from(date.toInstant().atZone(ZoneOffset.UTC));
+        
+        String stringForFile = "==================================================";
+        stringForFile += "\r\n\tKeys Team Bank";
+        stringForFile += "\r\n\tDate\t\t:" + ldate;
+        stringForFile += "\r\n\tYour Account Number : ";
+        stringForFile += "" + super.getAccountNumber();
+        stringForFile += "\r\n==================================================";
+        stringForFile += "\r\n\r\n\tYour Transfer To\t: ";
+        if(tujuan == 1999){
+            stringForFile += "Kotak Infaq";
+        }else stringForFile += "" + tujuan;
+        stringForFile += "\r\n\tWith Amount\t\t: $"
+                + amount;
+        stringForFile += "\r\n==================================================";
+        
+        return stringForFile;
+    }
+    
+    public void Print_StructTransfer(String Filename, String TransferRecord){
+        Screen screen = getScreen();
+        try {
+            File structTransfer = new File(Filename);
+            FileWriter printer  = new FileWriter(structTransfer, false);
+
+            printer.write(TransferRecord);
+            printer.flush();
+            printer.close();
+            screen.displayMessageLine("Take the struct. Thanks.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

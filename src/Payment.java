@@ -58,7 +58,7 @@ public class Payment extends Transaction {
                      bankDatabase.debitTransfer(PayDest.getUserAccount().getAccountNumber(), PayDest.getAmount());
                      
                      screen.displayMessage("Transaction Success.");
-                     screen.displayDollarAmount(PayDest.getUserAccount().getAvailableBalance());
+//                     screen.displayDollarAmount(PayDest.getUserAccount().getAvailableBalance());
                 } else {
                     screen.displayMessageLine("Canceling transaction...");
                 }
