@@ -21,8 +21,8 @@ public class Infaq extends Transaction{
                 super.getBankDatabase().credit(super.getAccountNumber(), amount);
                 screen.displayMessage("Please insert a transfer envelope containing ");
                 screen.displayDollarAmount(amount);
-                super.getBankDatabase().setLastTransfer(super.getAccountNumber(), amount);
-                super.getBankDatabase().setLastTransferAccount(super.getAccountNumber(), accountNumber);
+//                super.getBankDatabase().setLastTransfer(super.getAccountNumber(), amount);
+//                super.getBankDatabase().setLastTransferAccount(super.getAccountNumber(), accountNumber);
                 screen.displayMessageLine("\nInfaq Success");
             }else{
                 screen.displayMessageLine("\nCanceling transaction...");

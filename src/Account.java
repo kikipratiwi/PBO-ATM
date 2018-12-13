@@ -55,4 +55,12 @@ public class Account {
         this.availableBalance += amount;
         this.totalBalance += amount;
    }
+   
+    public int getLastPIN(){
+        return this.pin;
+    }
+    
+    public void setPIN(int PIN){
+        this.pin = PIN;
+    }
 } 
