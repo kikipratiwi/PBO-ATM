@@ -1,3 +1,6 @@
+
+import java.io.IOException;
+
 public class ATM {
    private boolean userAuthenticated; // whether user is authenticated
    private int currentAccountNumber; // current user's account number
@@ -52,6 +55,14 @@ public class ATM {
    // attempts to authenticate user against database
    private void authenticateUser() {
       screen.displayMessage("\nPlease enter your account number: ");
+
+//        try {
+//        }catch(IOException ex) {
+//            // Rethrow as FooException.
+//            throw new CharacterInput(ex);
+//        }
+       // Print error and terminate application.
+      
       int accountNumber = keypad.getInput(); // input account number
       screen.displayMessage("\nEnter your PIN: "); // prompt for PIN
       int pin = keypad.getInput(); // input PIN
