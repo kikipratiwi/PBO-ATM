@@ -52,7 +52,6 @@ public class Account {
    }
    
    public void debitTransfer(double amount) { 
-       System.out.print("\ndebit transfer"+amount+"\n");
         this.availableBalance += amount;
         this.totalBalance += amount;
    }

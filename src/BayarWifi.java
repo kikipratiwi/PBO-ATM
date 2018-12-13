@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -89,6 +90,5 @@ public class BayarWifi extends Transaction {
         screen.displayMessageLine(
            "\nInvalid selection. Try again.");
         return null;
-    }
-    
+    } 
 }
