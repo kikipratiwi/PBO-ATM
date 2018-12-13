@@ -13,9 +13,9 @@ public class BankDatabase {
       accounts[4] = new Account(8589, 0000, 1000.0, 000); //account ovo with no_telp and saldo
       accounts[5] = new Account(8521, 0000, 1500.0, 000); //account ovo with no_telp and saldo      
       //akun id wifi
-      accounts[4] = new Account (987654321, 4444, 0, 0);
+      accounts[5] = new Account (987654321, 4444, 0, 0);
       // hani : top-up DANA
-      accounts[5] = new Account(400812203, 0, 0, 0); // kode pembayaran, 0, saldo
+      accounts[6] = new Account(400812203, 0, 0, 0); // kode pembayaran, 0, saldo
    }
    
    private Account getAccount(int accountNumber) {
