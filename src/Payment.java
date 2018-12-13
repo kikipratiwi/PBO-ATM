@@ -239,13 +239,7 @@ public class Payment extends Transaction {
          // determine how to proceed based on the input value
          switch (input) {
             case TOPUP_GOPAY: 
-                userChoice = menus[input];
-                break;
-            
             case TOPUPDANA:
-               userChoice = menus[input];
-               break;
-            
             case TOPUP_OVO: 
                     // if the user chose a withdrawal amount 
                     // (i.e., chose option 1 or 2), return the
