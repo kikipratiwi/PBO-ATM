@@ -15,10 +15,10 @@ public class Payment extends Transaction {
    Screen screen;
    
    // constant corresponding to menu option to cancel
-   private final static int CANCELED = 0;
    private static final int TOPUP_GOPAY = 1;
    private static final int TOPUPDANA = 2;
    private static final int TOPUP_OVO = 3;
+   private final static int CANCELED = 4;
 
     public Payment(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad) {
         
@@ -231,7 +231,7 @@ public class Payment extends Transaction {
          screen.displayMessageLine("1 - TOP UP Go-Pay");
          screen.displayMessageLine("2 - TOP UP DANA");
          screen.displayMessageLine("3 - TOP UP OVO");
-         screen.displayMessageLine("0 - Cancel transaction");
+         screen.displayMessageLine("4 - Cancel transaction");
          screen.displayMessage("\nChoose a purchase menu: ");
 
          int input = keypad.getInput(); // get user input through keypad
