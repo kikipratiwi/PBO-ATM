@@ -3,10 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Purchase.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/ATM.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/ATMApp.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/46_ATM/src/Payment.java</file>
+=======
+            <file>file:/D:/Peter%20Belajar/Mata_Kuliah/Semester%203/PBO/Praktek/Kelompok/PBO-ATM/src/Infaq.java</file>
+            <file>file:/D:/Peter%20Belajar/Mata_Kuliah/Semester%203/PBO/Praktek/Kelompok/PBO-ATM/src/Keypad.java</file>
+            <file>file:/D:/Peter%20Belajar/Mata_Kuliah/Semester%203/PBO/Praktek/Kelompok/PBO-ATM/src/Transfer.java</file>
+            <file>file:/D:/Peter%20Belajar/Mata_Kuliah/Semester%203/PBO/Praktek/Kelompok/PBO-ATM/src/ATM.java</file>
+            <file>file:/D:/Peter%20Belajar/Mata_Kuliah/Semester%203/PBO/Praktek/Kelompok/PBO-ATM/src/TransferDestination.java</file>
+            <file>file:/D:/Peter%20Belajar/Mata_Kuliah/Semester%203/PBO/Praktek/Kelompok/PBO-ATM/src/Account.java</file>
+>>>>>>> master
         </group>
     </open-files>
 </project-private>
