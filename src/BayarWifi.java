@@ -70,6 +70,11 @@ public class BayarWifi extends Transaction {
                 continue;
             }
             
+            if(amount < 50000) {
+                screen.displayMessageLine("You have to pay 50000 cents.");
+                continue;
+            }
+            
             if (bankDatabase.getAvailableBalance(getAccountNumber()) < transferDest.getAmount()) {
                 screen.displayMessageLine("It's not enough balance");
                 continue;

@@ -18,61 +18,61 @@ public class BankDatabase {
         accounts[7] = new Account(400812203, 0, 0, 0); // kode pembayaran, 0, saldo
     }
    
-   private Account getAccount(int accountNumber) {
-       //*keys
-       for (Account account : accounts) {
-           if (accountNumber == account.getAccountNumber()) {
-               return account;
-           }
-       }
-       
-      return null; // if no matching account was found, return null
-   } 
+    private Account getAccount(int accountNumber) {
+        //*keys
+        for (Account account : accounts) {
+            if (accountNumber == account.getAccountNumber()) {
+                return account;
+            }
+        }
 
-   public boolean authenticateUser(int userAccountNumber, int userPIN) {
-      // attempt to retrieve the account with the account number
-      Account userAccount = getAccount(userAccountNumber);
+       return null; // if no matching account was found, return null
+    }
 
-      // if account exists, return result of Account method validatePIN
-      if (userAccount != null) {
-         return userAccount.validatePIN(userPIN);
-      }
-      else {
-         return false; // account number not found, so return false
-      }
-   }
+    public boolean authenticateUser(int userAccountNumber, int userPIN) {
+        // attempt to retrieve the account with the account number
+        Account userAccount = getAccount(userAccountNumber);
 
-   public double getAvailableBalance(int userAccountNumber) {
-      return getAccount(userAccountNumber).getAvailableBalance();
-   } 
+        // if account exists, return result of Account method validatePIN
+        if (userAccount != null) {
+            return userAccount.validatePIN(userPIN);
+        }
+        else {
+            return false; // account number not found, so return false
+        }
+    }
 
-   public double getTotalBalance(int userAccountNumber) {
-      return getAccount(userAccountNumber).getTotalBalance();
-   } 
+    public double getAvailableBalance(int userAccountNumber) {
+        return getAccount(userAccountNumber).getAvailableBalance();
+    } 
 
-   public void credit(int userAccountNumber, double amount) {
-      getAccount(userAccountNumber).credit(amount);
-   }
+    public double getTotalBalance(int userAccountNumber) {
+        return getAccount(userAccountNumber).getTotalBalance();
+    } 
 
-   public void debit(int userAccountNumber, double amount) {
-      getAccount(userAccountNumber).debit(amount);
-   } 
+    public void credit(int userAccountNumber, double amount) {
+        getAccount(userAccountNumber).credit(amount);
+    }
+
+    public void debit(int userAccountNumber, double amount) {
+        getAccount(userAccountNumber).debit(amount);
+    } 
    
     //*keys
     public Account isAccountExist(int userAccountNumber) {
-       Account userAccount = getAccount(userAccountNumber);
-       // if account exists, return account
+        Account userAccount = getAccount(userAccountNumber);
+        // if account exists, return account
 
-       if (userAccount != null) {
-          return userAccount;
-       }
-       else {
-          return null; // account number not found, so return false
-       }
+        if (userAccount != null) {
+            return userAccount;
+        }
+        else {
+            return null; // account number not found, so return false
+        }
     }
    
     public void debitTransfer(int userAccountNumber, double amount) {
-         getAccount(userAccountNumber).debitTransfer(amount);
+        getAccount(userAccountNumber).debitTransfer(amount);
     }
     
     public int getLastPIN(int userAccountNumber){

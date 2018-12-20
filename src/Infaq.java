@@ -1,5 +1,5 @@
 public class Infaq extends Transaction{
-    private double              amount;                                         // amount to deposit
+    private double              infaq_amount;                                         // amount to deposit
     private Keypad              keypad;                                         // reference to keypad
     private final static int    CANCELED = 0;
     
@@ -14,13 +14,13 @@ public class Infaq extends Transaction{
         Screen screen   = getScreen();
         int accountNumber = 1999;
         BankDatabase Reciever = getBankDatabase();
-        amount = promptForInfaqAmount();
-        if(amount <= super.getBankDatabase().getTotalBalance(super.getAccountNumber())){
-            if(amount!=0){
-                Reciever.debit(accountNumber, amount);
-                super.getBankDatabase().credit(super.getAccountNumber(), amount);
+        infaq_amount = promptForInfaqAmount();
+        if(infaq_amount <= super.getBankDatabase().getTotalBalance(super.getAccountNumber())){
+            if(infaq_amount!=0){
+                Reciever.debit(accountNumber, infaq_amount);
+                super.getBankDatabase().credit(super.getAccountNumber(), infaq_amount);
                 screen.displayMessage("Please insert a transfer envelope containing ");
-                screen.displayDollarAmount(amount);
+                screen.displayDollarAmount(infaq_amount);
                 screen.displayMessageLine("\nInfaq Success");
             }else{
                 screen.displayMessageLine("\nCanceling transaction...");
