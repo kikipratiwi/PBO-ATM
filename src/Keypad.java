@@ -10,29 +10,27 @@ public class Keypad{
     } 
 
     public int getInput() {
-      try
-      {
-          return input.nextInt();
-      } // user enters an integer
-      catch(InputMismatchException ex){
-          System.out.println("Input Mismatch Exception..");
-          input.nextLine();     // clean buffer
-          return 0;
-      }
-   }
-   
-   //*keys
-   public long getInputLong() {
-       try
-       {
-           return input.nextLong();
-       } // user enters an long integer
-       catch(InputMismatchException ex){
-           System.out.println("Input Mismatch Exception..");
-           input.nextLine();     // clean buffer
-           return 0;
-       }
-   }
+        try{
+            return input.nextInt();
+        } // user enters an integer
+        catch(InputMismatchException ex){
+            System.out.println("Input Mismatch Exception..");
+            input.nextLine();     // clean buffer
+            return 0;
+        }
+    }
+
+    //*keys
+    public long getInputLong() {
+        try{
+            return input.nextLong();
+        } // user enters an long integer
+        catch(InputMismatchException ex){
+            System.out.println("Input Mismatch Exception..");
+            input.nextLine();     // clean buffer
+            return 0;
+        }
+    }
 
     public String getInputString(){
         return input.next(); // user enters an String
