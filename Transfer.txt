@@ -4,8 +4,8 @@
 	Your Account Number	: 12345
 ==================================================
 
-	Your Transfer To	: 8765
-	With Amount		: $0.1
+	Your Transfer To	: 12345
+	With Amount		: $10.0
 		     SUCCESS
 
 ==================================================

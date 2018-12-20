@@ -82,6 +82,11 @@ public class Transfer extends Transaction {
                 continue;
             }
             
+            if(super.getAccountNumber() == destinationAccountNumber) {
+                screen.displayMessageLine("Can not transfer to your own account.");
+                continue;
+            }
+            
             if (amount <= 0) {
                 screen.displayMessageLine("Can not Transfer 0 or lower than 0");
                 continue;
