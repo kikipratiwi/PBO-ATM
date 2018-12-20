@@ -1,3 +1,6 @@
+
+import java.io.IOException;
+
 public class ATM {
    private boolean userAuthenticated; // whether user is authenticated
    private int currentAccountNumber; // current user's account number
@@ -11,13 +14,14 @@ public class ATM {
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
-   private static final int WITHDRAWAL = 2;
-   private static final int DEPOSIT = 3;
-   private static final int TRANSFER = 4;
-   private static final int PAY_WIFI = 5;
-   private static final int PURCHASE = 6;
-   private static final int PAYMENT = 7;
-   private static final int EXIT = 8;
+   private static final int WITHDRAWAL      = 2;
+   private static final int DEPOSIT         = 3;
+   private static final int TRANSFER        = 4;
+   private static final int PAY_WIFI        = 5;
+   private static final int PURCHASE        = 6;
+   private static final int PAYMENT         = 7;
+   private static final int INFAQ           = 8;
+   private static final int EXIT            = 9;
 
    // no-argument ATM constructor initializes instance variables
    public ATM() {
@@ -52,6 +56,14 @@ public class ATM {
    // attempts to authenticate user against database
    private void authenticateUser() {
       screen.displayMessage("\nPlease enter your account number: ");
+
+//        try {
+//        }catch(IOException ex) {
+//            // Rethrow as FooException.
+//            throw new CharacterInput(ex);
+//        }
+       // Print error and terminate application.
+      
       int accountNumber = keypad.getInput(); // input account number
       screen.displayMessage("\nEnter your PIN: "); // prompt for PIN
       int pin = keypad.getInput(); // input PIN
@@ -70,95 +82,106 @@ public class ATM {
       } 
    } 
 
-   // display the main menu and perform transactions
-   private void performTransactions() {
-      // local variable to store transaction currently being processed
-      Transaction currentTransaction = null;
-      
-      boolean userExited = false; // user has not chosen to exit
+    // display the main menu and perform transactions
+    private void performTransactions() {
+        // local variable to store transaction currently being processed
+        Transaction currentTransaction = null;
 
-      // loop while user has not chosen option to exit system
-      while (!userExited) {
-         // show main menu and get user selection
-         int mainMenuSelection = displayMainMenu();
+        boolean userExited = false; // user has not chosen to exit
 
-         // decide how to proceed based on user's menu selection
-         switch (mainMenuSelection) {
-            // user chose to perform one of three transaction types
-            case BALANCE_INQUIRY:  
-            case WITHDRAWAL:
-            case DEPOSIT:
-            case TRANSFER:
-            case PAY_WIFI:
-            case PURCHASE:
-            case PAYMENT:
-                
-                // initialize as new object of chosen type
-               currentTransaction = 
-                  createTransaction(mainMenuSelection);
+        // loop while user has not chosen option to exit system
+        while (!userExited) {
+            // show main menu and get user selection
+            int mainMenuSelection = displayMainMenu();
 
-               currentTransaction.execute(); // execute transaction
-               break; 
-            case EXIT: // user chose to terminate session
-               screen.displayMessageLine("\nExiting the system...");
-               userExited = true; // this ATM session should end
-               break;
-            default: // 
-               screen.displayMessageLine(
-                  "\nYou did not enter a valid selection. Try again.");
-               break;
-         }
-      } 
-   } 
+            // decide how to proceed based on user's menu selection
+            switch (mainMenuSelection) {
+                // user chose to perform one of three transaction types
+                case BALANCE_INQUIRY:  
+                case WITHDRAWAL:
+                case DEPOSIT:
+                case TRANSFER:
+                case PAY_WIFI:
+                case PURCHASE:
+                case PAYMENT:
+                case INFAQ:
+                    // initialize as new object of chosen type
+                    currentTransaction = createTransaction(mainMenuSelection);
+                    currentTransaction.execute(); // execute transaction
+                break; 
+                case EXIT:
+                    // user chose to terminate session
+                    screen.displayMessageLine("\nExiting the system...");
+                    userExited = true; // this ATM session should end
+                break;
+                default:
+                    screen.displayMessageLine(
+                       "\nYou did not enter a valid selection. Try again.");
+                break;
+            }
+        } 
+    } 
 
-   // display the main menu and return an input selection
-   private int displayMainMenu() {
-      screen.displayMessageLine("\nMain menu:");
-      screen.displayMessageLine("1 - View my balance");
-      screen.displayMessageLine("2 - Withdraw cash");
-      screen.displayMessageLine("3 - Deposit funds");
-      screen.displayMessageLine("4 - Transfer");
-      screen.displayMessageLine("5 - Pay Wifi Bill");
-      screen.displayMessageLine("6 - Purchase");
-      screen.displayMessageLine("7 - Payment");
-      screen.displayMessageLine("8 - Exit\n");
-      screen.displayMessage("Enter a choice: ");
-      return keypad.getInput(); // return user's selection
-   } 
+    // display the main menu and return an input selection
+    private int displayMainMenu() {
+        screen.displayMessageLine("\nMain menu:");
+        screen.displayMessageLine("1 - View my balance");
+        screen.displayMessageLine("2 - Withdraw cash");
+        screen.displayMessageLine("3 - Deposit funds");
+        screen.displayMessageLine("4 - Transfer");
+        screen.displayMessageLine("5 - Pay Wifi Bill");
+        screen.displayMessageLine("6 - Purchase");
+        screen.displayMessageLine("7 - Payment");
+        screen.displayMessageLine("8 - Infaq");
+        screen.displayMessageLine("9 - Exit\n");
+        screen.displayMessage("Enter a choice: ");
+        return keypad.getInput(); // return user's selection
+    } 
          
-   private Transaction createTransaction(int type) {
-      Transaction temp = null; 
-          
-      switch (type) {
-         case BALANCE_INQUIRY: 
-            temp = new BalanceInquiry(
-               currentAccountNumber, screen, bankDatabase);
+    private Transaction createTransaction(int type) {
+        Transaction temp = null; 
+
+        switch (type) {
+            case BALANCE_INQUIRY: 
+                temp = new BalanceInquiry(
+                   currentAccountNumber, screen, bankDatabase);
             break;
-         //*keys   
-         case WITHDRAWAL:
-            temp = new Withdrawal(
-               currentAccountNumber, screen, bankDatabase, keypad, cashDispenser);
+            //*keys   
+            case WITHDRAWAL:
+                temp = new Withdrawal(
+                   currentAccountNumber, screen, bankDatabase, keypad, cashDispenser);
             break;
-         //*keys   
-         case DEPOSIT:
-            temp = new Deposit(
+            //*keys   
+            case DEPOSIT:
+                temp = new Deposit(
                     currentAccountNumber, screen, bankDatabase, keypad, atmDepositSlot);
             break;
-         case TRANSFER:
-             temp = new Transfer(currentAccountNumber, screen, bankDatabase, keypad);
-             break;
-         case PAY_WIFI:
-             temp = new BayarWifi(currentAccountNumber, screen, bankDatabase, keypad);
-             break;
-         case PURCHASE:
-             temp = new Purchase(currentAccountNumber, screen, bankDatabase, keypad);
-             break;
-         case PAYMENT:
-             temp = new Payment(currentAccountNumber, screen, bankDatabase, keypad);
-             break;
-        
-      }
 
-      return temp;
-   } 
+            case TRANSFER:
+                temp = new Transfer(
+                    currentAccountNumber, screen, bankDatabase, keypad);
+            break;
+
+            case PAY_WIFI:
+                temp = new BayarWifi(
+                    currentAccountNumber, screen, bankDatabase, keypad);
+            break;
+
+            case PURCHASE:
+                temp = new Purchase(
+                    currentAccountNumber, screen, bankDatabase, keypad);
+            break;
+
+            case PAYMENT:
+                temp = new Payment(
+                    currentAccountNumber, screen, bankDatabase, keypad);
+            break;
+
+            case INFAQ:
+                temp = new Infaq(
+                    currentAccountNumber, screen, bankDatabase, keypad);
+            break;
+        }
+        return temp;
+    } 
 }

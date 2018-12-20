@@ -8,15 +8,15 @@ import java.util.Date;
  * @author KIKI
  */
 public class Transfer extends Transaction {
-   private int amount; // amount to withdraw
-   private Keypad keypad; // reference to keypad
-   private BankDatabase bankDatabase;
-   private int destinationAccountNumber;
-   Screen screen;
+    private double amount; // amount to withdraw
+    private Keypad keypad; // reference to keypad
+    private BankDatabase bankDatabase;
+    private int destinationAccountNumber;
+    Screen screen;
     private History history = new History();
-   // constant corresponding to menu option to cancel
-   private final static int CANCELED = 0;
-    private Date date;
+    // constant corresponding to menu option to cancel
+    private final static int CANCELED = 0;
+    private Date date = new Date();
 
     public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad) {
         
@@ -47,25 +47,23 @@ public class Transfer extends Transaction {
 
             screen.displayMessageLine("Transaction success.");
             
-            screen.displayDollarAmount(transferDest.getUserAccount().getAvailableBalance());
             history.saveToFile(3, getAccountNumber(), amount);
             
-       } else {
-           screen.displayMessageLine("Canceling transaction...");
-       }
+        } else {
+            screen.displayMessageLine("Canceling transaction...");
+        }
     }
     
     // prompt user to enter a transfer amount in cents 
     private TransferDestination promptForDetailTransaction() {
-       boolean valid = false; 
-       
-       TransferDestination transferDest = new TransferDestination();
-       
-       screen = getScreen(); // get reference to screen
-       int input;
-//       long amount;
-//       int amount;
-       while (!valid) {
+        boolean valid = false; 
+
+        TransferDestination transferDest = new TransferDestination();
+
+        screen = getScreen(); // get reference to screen
+        int input;
+        
+        while (!valid) {
             // display the prompt
             screen.displayMessage("\nPlease enter destination account number : ");
             destinationAccountNumber = keypad.getInput(); // receive input of account number
@@ -73,14 +71,19 @@ public class Transfer extends Transaction {
             // display the prompt
             screen.displayMessage("\nPlease enter a transfer amount in " + 
                "CENTS : ");
-//            amount = keypad.getInputLong(); // receive input of deposit amount
             amount = keypad.getInput(); // receive input of deposit amount
-
+            
+            
             transferDest.setAccount(destinationAccountNumber);
             transferDest.setAmount(amount / 100); // in dolar
 
             if(transferDest.getUserAccount() == null) {
                 screen.displayMessageLine("Invalid account number destination.");
+                continue;
+            }
+            
+            if (amount <= 0) {
+                screen.displayMessageLine("Can not Transfer 0 or lower than 0");
                 continue;
             }
             
@@ -106,14 +109,14 @@ public class Transfer extends Transaction {
         return null;
     }
     
-    private String Record_StructTransfer(int tujuan, int amount){
+    private String Record_StructTransfer(int tujuan, double amount){
         Screen screen = getScreen();
         LocalDate ldate = LocalDate.from(date.toInstant().atZone(ZoneOffset.UTC));
         
         String stringForFile = "==================================================";
-        stringForFile += "\r\n\tKeys Team Bank";
-        stringForFile += "\r\n\tDate\t\t:" + ldate;
-        stringForFile += "\r\n\tYour Account Number : ";
+        stringForFile += "\r\n\t\t  Keys Team Bank";
+        stringForFile += "\r\n\tDate\t\t\t: " + ldate;
+        stringForFile += "\r\n\tYour Account Number\t: ";
         stringForFile += "" + super.getAccountNumber();
         stringForFile += "\r\n==================================================";
         stringForFile += "\r\n\r\n\tYour Transfer To\t: ";
@@ -121,8 +124,9 @@ public class Transfer extends Transaction {
             stringForFile += "Kotak Infaq";
         }else stringForFile += "" + tujuan;
         stringForFile += "\r\n\tWith Amount\t\t: $"
-                + amount;
-        stringForFile += "\r\n==================================================";
+                + amount/100;
+        stringForFile += "\r\n\t\t     SUCCESS";
+        stringForFile += "\r\n\r\n==================================================";
         
         return stringForFile;
     }
