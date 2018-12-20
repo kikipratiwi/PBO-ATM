@@ -11,7 +11,7 @@
 public class TransferDestination {
     private Account userAccount;
 //    private long amount;
-    private int amount;
+    private double amount;
     
     public TransferDestination() {
         
@@ -23,7 +23,7 @@ public class TransferDestination {
     }
     
 //    public void setAmount(long amount) {
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -38,7 +38,7 @@ public class TransferDestination {
      * @return the amount
      */
 //    public long getAmount() {
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
     

@@ -33,10 +33,11 @@ public class Deposit extends Transaction {
             screen.displayDollarAmount(amount);
             
             if(depositSlot.isEnvelopeReceived()) {
-                screen.displayMessageLine("\n\nYour envelope has been received.\n" + "NOTE: The money just deposited will not be available until we verify the amount of any enclosed cash and your checks clear.");
+                screen.displayMessageLine("\n\nYour envelope has been received.\n"
+                    + "NOTE: The money just deposited will not be available "
+                    + "until we verify the amount of any enclosed cash and your checks clear.");
                 bankDatabase.debit(getAccountNumber(), amount);     
                 history.saveToFile(2, getAccountNumber(), amount);
-            
             }
             
        } else {
@@ -54,10 +55,10 @@ public class Deposit extends Transaction {
       int input = keypad.getInput(); // receive input of deposit amount
       
       // check whether the user canceled or entered a valid amount
-      if (input == CANCELED) {
+      if (input <= CANCELED) {
+          screen.displayMessageLine("Can not deposit 0 or lower than 0 dollar");
          return CANCELED;
-      }
-      else {
+      }else{
          return (double) input / 100; // return dollar amount
       }
    }

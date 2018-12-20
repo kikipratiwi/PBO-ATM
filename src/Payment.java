@@ -58,7 +58,7 @@ public class Payment extends Transaction {
                      bankDatabase.debitTransfer(PayDest.getUserAccount().getAccountNumber(), PayDest.getAmount());
                      
                      screen.displayMessage("Transaction Success.");
-                     screen.displayDollarAmount(PayDest.getUserAccount().getAvailableBalance());
+//                     screen.displayDollarAmount(PayDest.getUserAccount().getAvailableBalance());
                 } else {
                     screen.displayMessageLine("Canceling transaction...");
                 }
@@ -153,6 +153,11 @@ public class Payment extends Transaction {
                 screen.displayMessageLine("Invalid payment code ");
                 continue;
             }
+            
+//            if(amount <= 0) {
+//                screen.displayMessageLine("Can not top up 0 or lower than 0 dollar");
+//                continue;
+//            }
             
             if (bankDatabase.getAvailableBalance(getAccountNumber()) < PayDest.getAmount()) {
                 screen.displayMessageLine("It's not enough balance");

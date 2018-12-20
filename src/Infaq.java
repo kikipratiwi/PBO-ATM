@@ -21,8 +21,6 @@ public class Infaq extends Transaction{
                 super.getBankDatabase().credit(super.getAccountNumber(), amount);
                 screen.displayMessage("Please insert a transfer envelope containing ");
                 screen.displayDollarAmount(amount);
-//                super.getBankDatabase().setLastTransfer(super.getAccountNumber(), amount);
-//                super.getBankDatabase().setLastTransferAccount(super.getAccountNumber(), accountNumber);
                 screen.displayMessageLine("\nInfaq Success");
             }else{
                 screen.displayMessageLine("\nCanceling transaction...");
@@ -39,12 +37,11 @@ public class Infaq extends Transaction{
         screen.displayMessage("Please enter an infaq amount in "
             + "CENTS (or 0 to cancel): ");
         int input = keypad.getInput();
-
-        // check whether the user canceled or entered a valid amount
-        if (input == CANCELED) {
-            return CANCELED;
-        }else {
+        if (input != CANCELED) {
             return (double) input / 100;                                        // return dollar amount
+        }else{
+            return CANCELED;
+
         }
     }
 }
