@@ -154,6 +154,11 @@ public class Payment extends Transaction {
                 continue;
             }
             
+//            if(amount <= 0) {
+//                screen.displayMessageLine("Can not top up 0 or lower than 0 dollar");
+//                continue;
+//            }
+            
             if (bankDatabase.getAvailableBalance(getAccountNumber()) < PayDest.getAmount()) {
                 screen.displayMessageLine("It's not enough balance");
                 continue;
