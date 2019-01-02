@@ -15,18 +15,12 @@ public class Infaq extends Transaction{
         int accountNumber = 1999;
         BankDatabase Reciever = getBankDatabase();
         infaq_amount = promptForInfaqAmount();
-        if(infaq_amount <= super.getBankDatabase().getTotalBalance(super.getAccountNumber())){
-            if(infaq_amount!=0){
-                Reciever.debit(accountNumber, infaq_amount);
-                super.getBankDatabase().credit(super.getAccountNumber(), infaq_amount);
-                screen.displayMessage("Please insert a transfer envelope containing ");
-                screen.displayDollarAmount(infaq_amount);
-                screen.displayMessageLine("\nInfaq Success");
-            }else{
-                screen.displayMessageLine("\nCanceling transaction...");
-            }
-        }else{
-            screen.displayMessageLine("\nNot enough Balance to Infaq.\nCanceling transaction...");
+        if(isValidTransaction(infaq_amount)){
+            Reciever.debit(accountNumber, infaq_amount);
+            super.getBankDatabase().credit(super.getAccountNumber(), infaq_amount);
+            screen.displayMessage("Please insert a transfer envelope containing ");
+            screen.displayDollarAmount(infaq_amount);
+            screen.displayMessageLine("\nInfaq Success");
         }
     }
     
@@ -42,6 +36,18 @@ public class Infaq extends Transaction{
         }else{
             return CANCELED;
 
+        }
+    }
+    
+    public boolean isValidTransaction(double infaqAmount){
+        if(infaqAmount <= super.getBankDatabase().getTotalBalance(super.getAccountNumber())){
+            if(infaqAmount!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
         }
     }
 }

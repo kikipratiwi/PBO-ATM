@@ -65,22 +65,7 @@ public class BayarWifi extends Transaction {
             transferDest.setAccount(destinationAccountNumber);
             transferDest.setAmount((int) (amount / 100)); // in dolar
 
-            if(transferDest.getUserAccount() == null) {
-                screen.displayMessageLine("ID Number is not recognized.");
-                continue;
-            }
-            
-            if(amount < 50000) {
-                screen.displayMessageLine("You have to pay 50000 cents.");
-                continue;
-            }
-            
-            if (bankDatabase.getAvailableBalance(getAccountNumber()) < transferDest.getAmount()) {
-                screen.displayMessageLine("It's not enough balance");
-                continue;
-            }
-            
-            valid = true;
+            valid = isValidTransaction(transferDest, amount);
         }
        
         screen.displayMessage("\nAre you sure for this transaction (1 to yes or 0 to cancel) : ");
@@ -95,5 +80,24 @@ public class BayarWifi extends Transaction {
         screen.displayMessageLine(
            "\nInvalid selection. Try again.");
         return null;
-    } 
+    }
+    
+    private boolean isValidTransaction(TransferDestination transferDest, long amount){
+        if(transferDest.getUserAccount() == null) {
+            screen.displayMessageLine("ID Number is not recognized.");
+            return false;
+        }
+
+        if(amount < 50000) {
+            screen.displayMessageLine("You have to pay 50000 cents.");
+            return false;
+        }
+
+        if (bankDatabase.getAvailableBalance(getAccountNumber()) < transferDest.getAmount()) {
+            screen.displayMessageLine("It's not enough balance");
+            return false;
+        }
+
+        return true;
+    }
 }
