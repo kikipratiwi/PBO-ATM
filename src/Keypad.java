@@ -7,7 +7,7 @@ public class Keypad{
 
     public Keypad() {
         input = new Scanner(System.in);    
-    } 
+    }
 
     public int getInput() {
         try{
@@ -35,4 +35,4 @@ public class Keypad{
     public String getInputString(){
         return input.next(); // user enters an String
     }
-} 
+}

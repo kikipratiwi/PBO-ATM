@@ -21,7 +21,8 @@ public class ATM {
    private static final int PURCHASE        = 6;
    private static final int PAYMENT         = 7;
    private static final int INFAQ           = 8;
-   private static final int EXIT            = 9;
+   private static final int CHANGE_PIN      = 9;
+   private static final int EXIT            = 10;
 
    // no-argument ATM constructor initializes instance variables
    public ATM() {
@@ -105,6 +106,7 @@ public class ATM {
                 case PURCHASE:
                 case PAYMENT:
                 case INFAQ:
+                case CHANGE_PIN:
                     // initialize as new object of chosen type
                     currentTransaction = createTransaction(mainMenuSelection);
                     currentTransaction.execute(); // execute transaction
@@ -133,7 +135,8 @@ public class ATM {
         screen.displayMessageLine("6 - Purchase");
         screen.displayMessageLine("7 - Payment");
         screen.displayMessageLine("8 - Infaq");
-        screen.displayMessageLine("9 - Exit\n");
+        screen.displayMessageLine("9 - Change PIN");
+        screen.displayMessageLine("10 - Exit\n");
         screen.displayMessage("Enter a choice: ");
         return keypad.getInput(); // return user's selection
     } 
@@ -179,6 +182,11 @@ public class ATM {
 
             case INFAQ:
                 temp = new Infaq(
+                    currentAccountNumber, screen, bankDatabase, keypad);
+            break;
+                
+            case CHANGE_PIN:
+                temp = new ChangePIN(
                     currentAccountNumber, screen, bankDatabase, keypad);
             break;
         }
