@@ -65,9 +65,12 @@ public class Transfer extends Transaction {
         
         while (!valid) {
             // display the prompt
-            screen.displayMessage("\nPlease enter destination account number : ");
+//           do(){
+           screen.displayMessage("\nPlease enter destination account number : ");
             destinationAccountNumber = keypad.getInput(); // receive input of account number
-
+//            if(destinationAccountNumber==bankDatabase.get)
+//       }while();
+            
             // display the prompt
             screen.displayMessage("\nPlease enter a transfer amount in " + 
                "CENTS : ");

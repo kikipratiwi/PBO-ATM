@@ -44,30 +44,39 @@ public class BayarWifi extends Transaction {
     // prompt user to enter a transfer amount in cents 
     private TransferDestination promptForDetailTransaction() {
        boolean valid = false; 
+       boolean enoughBalance = false;
        
        TransferDestination transferDest = new TransferDestination();
        
        screen = getScreen(); // get reference to screen
        int destinationAccountNumber, input;
-       long amount;
+       long _amount = 0;
        
        while (!valid) {
             // display the prompt
             screen.displayMessage("\nPlease enter your ID Number : ");
             destinationAccountNumber = keypad.getInput(); // receive input of account number
 
-            // display the prompt
-            screen.displayMessageLine("\nYou have to pay 50000 cents");
-            screen.displayMessage("\nPlease enter your pay amount in " + 
-               "CENTS : ");
-            amount = keypad.getInputLong(); // receive input of deposit amount
-
             transferDest.setAccount(destinationAccountNumber);
-            transferDest.setAmount((int) (amount / 100)); // in dolar
 
-            valid = isValidTransaction(transferDest, amount);
+            valid = isValidTransaction(transferDest);
+            
+            if(valid){
+                // display the prompt
+                screen.displayMessageLine("\nYou have to pay 50000 cents");
+               _amount = 50000; // receive input of deposit amount
+                transferDest.setAmount((int) (_amount / 100)); // in dolar
+                enoughBalance = isEnoughBalance(transferDest);
+                if(!enoughBalance){
+                    valid = true;
+                }
+            }
         }
-       
+        
+        if(!enoughBalance){
+            return null;
+        }
+            
         screen.displayMessage("\nAre you sure for this transaction (1 to yes or 0 to cancel) : ");
         input = keypad.getInput(); // receive input of deposit amount
 
@@ -82,22 +91,20 @@ public class BayarWifi extends Transaction {
         return null;
     }
     
-    private boolean isValidTransaction(TransferDestination transferDest, long amount){
+    private boolean isValidTransaction(TransferDestination transferDest){
         if(transferDest.getUserAccount() == null) {
             screen.displayMessageLine("ID Number is not recognized.");
             return false;
         }
-
-        if(amount < 50000) {
-            screen.displayMessageLine("You have to pay 50000 cents.");
-            return false;
-        }
-
+        return true;
+    }
+    
+    private boolean isEnoughBalance(TransferDestination transferDest){
         if (bankDatabase.getAvailableBalance(getAccountNumber()) < transferDest.getAmount()) {
             screen.displayMessageLine("It's not enough balance");
             return false;
         }
-
         return true;
     }
+
 }
