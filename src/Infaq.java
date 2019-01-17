@@ -12,11 +12,10 @@ public class Infaq extends Transaction{
     @Override
     public void execute() {
         Screen screen   = getScreen();
-        int accountNumber = 1999;
         BankDatabase Reciever = getBankDatabase();
         infaq_amount = promptForInfaqAmount();
+        System.out.print(infaq_amount);
         if(isValidTransaction(infaq_amount)){
-            Reciever.debit(accountNumber, infaq_amount);
             super.getBankDatabase().credit(super.getAccountNumber(), infaq_amount);
             screen.displayMessage("Please insert a transfer envelope containing ");
             screen.displayDollarAmount(infaq_amount);
@@ -31,23 +30,11 @@ public class Infaq extends Transaction{
         screen.displayMessage("Please enter an infaq amount in "
             + "CENTS (or 0 to cancel): ");
         int input = keypad.getInput();
-        if (input != CANCELED) {
-            return (double) input / 100;                                        // return dollar amount
-        }else{
-            return CANCELED;
-
-        }
+        return input != CANCELED ? (double) input / 100 : CANCELED;
     }
     
     public boolean isValidTransaction(double infaqAmount){
-        if(infaqAmount <= super.getBankDatabase().getTotalBalance(super.getAccountNumber())){
-            if(infaqAmount!=0){
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
+        return infaqAmount <= super.getBankDatabase().getTotalBalance(super.getAccountNumber())
+                && infaqAmount != 0;
     }
 }

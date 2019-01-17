@@ -26,7 +26,7 @@ public class BankDatabase {
             }
         }
 
-       return null; // if no matching account was found, return null
+        return null; // if no matching account was found, return null
     }
 
     public boolean authenticateUser(int userAccountNumber, int userPIN) {

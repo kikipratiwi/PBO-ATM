@@ -118,20 +118,19 @@ public class Transfer extends Transaction {
         Screen screen = getScreen();
         LocalDate ldate = LocalDate.from(date.toInstant().atZone(ZoneOffset.UTC));
         
-        String stringForFile = "==================================================";
-        stringForFile += "\r\n\t\t  Keys Team Bank";
+        String stringForFile = "=================================================="
+                + "\r\n\t\t  Keys Team Bank";
         stringForFile += "\r\n\tDate\t\t\t: " + ldate;
         stringForFile += "\r\n\tYour Account Number\t: ";
         stringForFile += "" + super.getAccountNumber();
-        stringForFile += "\r\n==================================================";
-        stringForFile += "\r\n\r\n\tYour Transfer To\t: ";
-        if(tujuan == 1999){
-            stringForFile += "Kotak Infaq";
-        }else stringForFile += "" + tujuan;
+        stringForFile += "\r\n=================================================="
+                + "\r\n\r\n\tYour Transfer To\t: ";
+        if(tujuan == 1999) stringForFile += "Kotak Infaq";
+        else stringForFile += "" + tujuan;
         stringForFile += "\r\n\tWith Amount\t\t: $"
                 + amount/100;
-        stringForFile += "\r\n\t\t     SUCCESS";
-        stringForFile += "\r\n\r\n==================================================";
+        stringForFile += "\r\n\t\t     SUCCESS"
+                + "\r\n\r\n==================================================";
         
         return stringForFile;
     }
