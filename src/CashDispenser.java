@@ -17,12 +17,6 @@ public class CashDispenser {
    // indicates whether cash dispenser can dispense desired amount
    public boolean isSufficientCashAvailable(int amount) {
       int billsRequired = amount / 20; // number of $20 bills required
-
-      if (count >= billsRequired) {
-         return true; // enough bills available
-      }
-      else {
-         return false; // not enough bills available
-      }
+       return count >= billsRequired;
    }
 } 

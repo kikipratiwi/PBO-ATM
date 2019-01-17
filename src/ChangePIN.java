@@ -3,6 +3,7 @@
 
 public class ChangePIN extends Transaction{
     private Keypad              keypad;                                         // reference to keypad
+    private Screen              screen;
     private final static int    CANCELED = 0;                                   // constant for cancel option
 
     // GantiPIN constructor
@@ -10,13 +11,13 @@ public class ChangePIN extends Transaction{
         // initialize superclass variables
         super(userAccountNumber, atmScreen, atmBankDatabase);
         keypad      = atmKeypad;
+        screen      = super.getScreen();
     } 
 
     // perform transaction
     @Override
     public void execute(){
         validatePIN(EnterNewPIN());
-        
     }
     
     public void validatePIN(int newPIN){
@@ -30,9 +31,7 @@ public class ChangePIN extends Transaction{
     }
     
     public int EnterNewPIN(){
-        Screen screen = super.getScreen();
         screen.displayMessage("Input your new PIN : ");
-        int newPIN = keypad.getInput();
-        return newPIN;
+        return keypad.getInput();
     }
 }

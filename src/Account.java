@@ -17,13 +17,7 @@ public class Account {
 
     // determines whether a user-specified PIN matches PIN in Account
     public boolean validatePIN(int userPIN) {
-        if (userPIN == pin) {
-            return true;
-        }
-        else {
-            //*keys
-            return false;
-        }
+        return userPIN == pin; //*keys
     } 
 
     // returns available balance
@@ -38,13 +32,11 @@ public class Account {
 
     //*keys
     public void credit(double amount) {
-        this.availableBalance -= amount;
-        this.totalBalance -= amount;
+        this.availableBalance = this.totalBalance -= amount;
     }
 
     public void debit(double amount) {
         this.totalBalance += amount;
-
     }
 
     public int getAccountNumber() {
@@ -52,8 +44,7 @@ public class Account {
     }
 
     public void debitTransfer(double amount) { 
-        this.availableBalance += amount;
-        this.totalBalance += amount;
+        this.availableBalance = this.totalBalance += amount;
     }
    
     public int getLastPIN(){
