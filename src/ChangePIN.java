@@ -24,6 +24,8 @@ public class ChangePIN extends Transaction{
         Screen screen = super.getScreen();
         if(newPIN == super.getBankDatabase().getLastPIN(super.getAccountNumber())){
             screen.displayMessageLine("Can't change to your current PIN");
+        }else if(newPIN < 0){
+            screen.displayMessageLine("Can't change to your PIN with minus");
         }else{
             super.getBankDatabase().setPIN(super.getAccountNumber(),newPIN);
             screen.displayMessageLine("\nYou changed your PIN");
