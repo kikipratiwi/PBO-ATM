@@ -14,12 +14,13 @@ public class Infaq extends Transaction{
         Screen screen   = getScreen();
         BankDatabase Reciever = getBankDatabase();
         infaq_amount = promptForInfaqAmount();
-        System.out.print(infaq_amount);
         if(isValidTransaction(infaq_amount)){
             super.getBankDatabase().credit(super.getAccountNumber(), infaq_amount);
             screen.displayMessage("Please insert a transfer envelope containing ");
             screen.displayDollarAmount(infaq_amount);
             screen.displayMessageLine("\nInfaq Success");
+        }else{
+            screen.displayMessageLine("\nInfaq Failed");
         }
     }
     
@@ -35,6 +36,6 @@ public class Infaq extends Transaction{
     
     public boolean isValidTransaction(double infaqAmount){
         return infaqAmount <= super.getBankDatabase().getTotalBalance(super.getAccountNumber())
-                && infaqAmount != 0;
+                && infaqAmount > 0;
     }
 }
